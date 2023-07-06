@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VReact</title>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+    <script src="Engine/main.js" type="module"></script>
+    <script type="module">
+        import { VReact } from "./Engine/main.js";
+        let V = new VReact("#app");
+        console.log(V);
+
+        class Counter extends V.Components {
+            constructor() {
+                super();
+                this.$V.count = 0;
+            }
+
+            Element = `
+                <div>
+                    <button onclick="{this.$V.count++}">Click {{ count }}</button>
+                </div>
+            `
+
+            VarName = "counter";
+        }
+
+        let counter = new Counter();
+
+        V.Render(counter.render());
+    </script>
+</body>
+
+</html>
